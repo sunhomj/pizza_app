@@ -5,6 +5,8 @@ import { Title } from '../Styles/title';
 const NavbarStyled = styled.div`
 	background: ${pizzaRed};
 	padding: 10px;
+	width: 100%;
+	position: fixed;
 `;
 
 const Logo = styled(Title)`

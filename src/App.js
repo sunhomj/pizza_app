@@ -1,7 +1,7 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import Navbar from './Navbar/Navbar'
-
+import { Banner } from './Banner/Banner'
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Open Sans', sans-serif;
@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <GlobalStyle whiteColor />
-      <Navbar/>
+      <Navbar /><Banner/>
       <div>hellow Sunny</div>
     </>
   );
