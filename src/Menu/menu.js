@@ -11,7 +11,10 @@ const MenuStyled = styled.div`
 export const Menu = () => {
 	return (
 		<MenuStyled>
-			<h1>Menu</h1>
+			{Object.entries(foods).map(([sectionName, foods])=>(
+				<>
+					{console.log([sectionName, foods])}
+				<h1>{sectionName}</h1>
 			<FoodGrid>
 				{foods.map((el) => {
 					return (
@@ -21,6 +24,8 @@ export const Menu = () => {
 					);
 				})}
 			</FoodGrid>
+				</>
+			))}
 		</MenuStyled>
 	);
 };
