@@ -18,7 +18,11 @@ color:white;
 export const Navbar = () => {
 	return (
 		<NavbarStyled>
-			<Logo>Sunny pizza 🍕</Logo>
+			<Logo>
+				Sunny pizza<span role="img" aria-label="pizza">
+					🍕
+				</span>
+			</Logo>
 		</NavbarStyled>
 	);
 };
