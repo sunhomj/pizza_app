@@ -1,16 +1,16 @@
 export const foodItems = [
 	{
-		name: 'Cheese Pizza',
+		name: 'Cheese',
 		img: '/img/pizza.png',
 		section: 'Pizza'
 	},
 	{
-		name: 'Pepperoni Pizza',
+		name: 'Pepperoni',
 		img: '/img/pizza2.jpeg',
 		section: 'Pizza'
 	},
 	{
-		name: 'Prown Snadwich',
+		name: 'Prown',
 		img: '/img/sandwich.jpeg',
 		section: 'Sandwich'
 	},
@@ -30,27 +30,27 @@ export const foodItems = [
 		section: 'Side'
 	},
 	{
-		name: 'chicken pizza',
+		name: 'chicken',
 		img: '/img/chicken-pizza.jpeg',
 		section: 'Pizza'
 	},
 	{
-		name: 'bom pizza',
+		name: 'bom',
 		img: '/img/pizza.jpeg',
 		section: 'Pizza'
 	},
 	{
-		name: 'sandwich-lemons',
+		name: 'subway',
 		img: '/img/sandwich-lemons.jpg',
 		section: 'Sandwich'
 	},
 	{
-		name: 'bom pizza',
-		img: '/img/pizza.jpeg',
+		name: 'love',
+		img: '/img/pizza2.jpg',
 		section: 'Pizza'
 	},
 	{
-		name: 'club-sandwich',
+		name: 'club',
 		img: '/img/club-sandwich.jpg',
 		section: 'Sandwich'
 	}

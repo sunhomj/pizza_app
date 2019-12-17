@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import { Navbar } from './Navbar/Navbar'
 import { Banner } from './Banner/Banner'
 import { Menu } from './Menu/Menu'
-
+import ScrollToTop from './ScrollToTop/ScrollToTop'
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Open Sans', sans-serif;
@@ -17,9 +17,11 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <>
+      
       <GlobalStyle whiteColor />
       <Navbar /><Banner /><Menu />
       <div>hellow Sunny</div>
+      <ScrollToTop />
     </>
   );
 }
