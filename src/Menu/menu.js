@@ -1,21 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 import { foods } from '../Data/FoodData';
+import { FoodGrid, Food, FoodLabel } from './FoodGrid';
 
 const MenuStyled = styled.div`
-	border: 2px solid black;
 	height: 1000px;
-	margin: 0px 400px 50px 20px;
+	margin: 0px 20px 50px 20px;
 `;
 
-const menu = () => {
+export const Menu = () => {
 	return (
 		<MenuStyled>
-			{foods.map((el) => {
-				return <div key={el.name} img={el.img} />;
-			})}
+			<h1>Menu</h1>
+			<FoodGrid>
+				{foods.map((el) => {
+					return (
+						<Food img={el.img}>
+							<FoodLabel>{el.name}</FoodLabel>
+						</Food>
+					);
+				})}
+			</FoodGrid>
 		</MenuStyled>
 	);
 };
-
-export default menu;

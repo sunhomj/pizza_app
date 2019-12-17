@@ -6,9 +6,9 @@ export const foods = [
 	{
 		name: 'Pepperoni Pizza',
 		img: '/img/pizza2.jpeg'
-	},
-	{
-		name: 'Prown Snadwich',
-		img: '/img/sandwich.jpeg'
 	}
+	// {
+	// 	name: 'Prown Snadwich',
+	// 	img: '/img/sandwich.jpeg'
+	// }
 ];
