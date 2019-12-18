@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import { Title } from '../Styles/title';
 export const FoodGrid = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	gap: 20px;
+	width: 60%;
 `;
 
-export const Food = styled(Title)`
+export const Food = styled.div`
 	height: 100px;
 	background-image: ${({ img }) => `url(${img});`};
 	background-position: center;
@@ -16,16 +17,25 @@ export const Food = styled(Title)`
 	padding: 10px;
 	filter:contrast(75%);
 	border-radius: 7px;
-	box-shadow: 2px 1px 10px 1px grey;
+	margin-top:3px;
+	box-shadow: 0px 0px 2px 0px grey;
+	transition-property: box-shadow margin-top filter;
+	transition-duration: 0.2s;
 	&:hover{
 		cursor : pointer;
+		filter:contrast(100%);
 		opacity:0.7;
+		margin-top: 0px;
+		margin-bottom:3px;
+		box-shadow: 0px 5px 10px 0px grey;
 	}
 `;
 
-export const FoodLabel = styled.div`
+export const FoodLabel = styled(Title)`
 	position: absolute;
 	background-color: rgba(255, 255, 255, 0.8);
 	padding: 4px;
+
 	border-radius: 10px;
+	font-size: 0.7em;
 `;

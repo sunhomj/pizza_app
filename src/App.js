@@ -1,25 +1,24 @@
-import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import React, {useState} from 'react';
+import { GlobalStyle } from './Styles/GlobalStyle'
 import { Navbar } from './Navbar/Navbar'
 import { Banner } from './Banner/Banner'
-import { Menu } from './Menu/Menu'
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    font-family: 'Open Sans', sans-serif;
-    margin:0;
-  }
-  h1,h2,h3{
-    font-family: 'Righteous', cursive;
-  }
-`;
+import { Menu } from './Menu/menu'
+import ScrollToTop from './ScrollToTop/ScrollToTop'
+import { FoodDialog } from './FoodDialog/FoodDialog'
 
 function App() {
+  const [openFood, setOpenFood] = useState();
+
   return (
     <>
-      <GlobalStyle whiteColor />
-      <Navbar /><Banner /><Menu />
-      <div>hellow Sunny</div>
+      
+      <GlobalStyle />
+    <FoodDialog openFood={openFood} setOpenFood={setOpenFood}/>
+      <Navbar />
+      <Banner />
+      <Menu setOpenFood={setOpenFood} />
+      <ScrollToTop />
+      
     </>
   );
 }

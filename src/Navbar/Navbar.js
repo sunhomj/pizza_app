@@ -7,7 +7,10 @@ const NavbarStyled = styled.div`
 	background: ${pizzaRed};
 	padding: 10px;
 	width: 100%;
-	position: fixed;
+	top: 0;
+	position: sticky;
+	display: block;
+	z-index: 999;
 `;
 
 const Logo = styled(Title)`
@@ -18,7 +21,12 @@ color:white;
 export const Navbar = () => {
 	return (
 		<NavbarStyled>
-			<Logo>Sunny pizza 🍕</Logo>
+			<Logo>
+				Sunny pizza
+				<span role="img" aria-label="pizza">
+					🍕
+				</span>
+			</Logo>
 		</NavbarStyled>
 	);
 };
