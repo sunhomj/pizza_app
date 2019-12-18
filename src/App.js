@@ -5,6 +5,7 @@ import { Banner } from './Banner/Banner'
 import { Menu } from './Menu/menu'
 import ScrollToTop from './ScrollToTop/ScrollToTop'
 import { FoodDialog } from './FoodDialog/FoodDialog'
+import { Order } from './Order/Order';
 
 function App() {
   const [openFood, setOpenFood] = useState();
@@ -17,6 +18,7 @@ function App() {
       <Navbar />
       <Banner />
       <Menu setOpenFood={setOpenFood} />
+      <Order/>
       <ScrollToTop />
       
     </>
