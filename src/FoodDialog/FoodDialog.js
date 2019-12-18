@@ -11,8 +11,8 @@ const Dialog = styled.div`
   z-index:5;
   max-height: calc(100% - 100px);
   left: calc(50% - 250px);
-
 `;
+
 const DialogShadow = styled.div`
 position:fixed;
 height:100%;
@@ -22,10 +22,10 @@ background-color: black;
 opacity:0.7;
 z-index:4;
 `;
+
 const DialogFoodLabel = styled(FoodLabel)`
 font-size: 1em;
 margin:10px;
-
 `
 
 const DialogBanner = styled.div`
@@ -35,6 +35,9 @@ const DialogBanner = styled.div`
   background-position:center;
   background-size:cover;
 `;
+
+
+
 export const FoodDialog = ({ openFood, setOpenFood}) => {
   function close() {
     setOpenFood();
