@@ -11,17 +11,19 @@ const MenuStyled = styled.div`
 export const Menu = ({ setOpenFood }) => {
 	return (
 		<MenuStyled>
-			{Object.entries(foods).map(([sectionName, foods])=>(
+			{Object.entries(foods).map(([sectionName, foods],j)=>(
 				<>
-					{console.log([sectionName, foods])}
+					{/* {console.log([sectionName, foods])} */}
 				<h1>{sectionName}</h1>
-			<FoodGrid>
+			<FoodGrid key={foods[j]}>
+				
 				{foods.map((food) => {
 					return (
-						<Food img={food.img} onClick={() => {
+						<Food key={food.img} img={food.img} onClick={() => {
 							setOpenFood(food)
+						
 						}}>
-							<FoodLabel>{food.name}</FoodLabel>
+							<FoodLabel key={food.name}>{food.name}</FoodLabel>
 						</Food>
 					);
 				})}

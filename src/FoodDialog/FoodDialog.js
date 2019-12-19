@@ -1,18 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FoodLabel } from '../Menu/FoodGrid';
+import { pizzaRed } from '../Styles/colors';
+import { Title } from '../Styles/title';
 
 const Dialog = styled.div`
   width:500px;
-  height:2000px;
   background-color:white;
   position:fixed;
   top:75px;
-  border-radius: 10px;
   z-index:5;
   max-height: calc(100% - 100px);
   left: calc(50% - 250px);
+  display: flex;
+  flex-direction: column;
+  border-radius:10px;
+
 `;
+
 const DialogShadow = styled.div`
 position:fixed;
 height:100%;
@@ -22,33 +27,63 @@ background-color: black;
 opacity:0.7;
 z-index:4;
 `;
-const DialogBannerName = styled(FoodLabel)`
-font-size:1em;
+
+const DialogFoodLabel = styled(FoodLabel)`
+font-size: 1em;
 margin:10px;
+
 `
+
 const DialogBanner = styled.div`
-  height:200px;
-  border-radius: 10px;
+  min-height:200px;
   margin-bottom:20px;
   ${({ img }) => `background-image: url(${img});`}
   background-position:center;
   background-size:cover;
+  border-radius:10px;
 `;
-export const FoodDialog = ({openFood, setOpenFood}) => {
-  // let openFoodFake={...openFood};
+export const DialogContent = styled.div`
+min-height:100px;
+overflow:auto;
 
-  function closeDialog(){
+
+`;
+
+export const DialogFooter = styled.div`
+display:flex;
+justify-Content: center;
+height:60px;
+    box-shadow: 0px -3px 6px 0px grey;
+`;
+
+export const ConfirmButton = styled(Title)`
+margin:10px;
+color:red;
+height:20px;
+border-radius: 5px;
+padding: 10px;
+text-align:center;
+width:200px;
+cursor:pointer;
+background-color:${pizzaRed}
+
+`
+
+
+
+export const FoodDialog = ({ openFood, setOpenFood}) => {
+  function close() {
     setOpenFood();
-  }
-  if(!openFood) return null;
-
-    return <>
-        <DialogShadow onClick={closeDialog}> </DialogShadow>
-        <Dialog><DialogBanner img={openFood.img}>
-        <DialogBannerName>{openFood.name}</DialogBannerName>
-        </DialogBanner>
-        
-        </Dialog>
-    </>
+    }
+  
+  return openFood ? <>
+    <DialogShadow onClick={close}> </DialogShadow>
+      <Dialog><DialogBanner img={openFood.img}>
+        <DialogFoodLabel>{openFood.name}</DialogFoodLabel>
+    </DialogBanner>
+      <DialogContent>dd</DialogContent>
+     
+      <DialogFooter><ConfirmButton>Confirm</ConfirmButton></DialogFooter>
+    </Dialog>
+    </> : null
     };
-

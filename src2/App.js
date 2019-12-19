@@ -14,12 +14,13 @@ function App() {
     <>
       
       <GlobalStyle />
-      <FoodDialog openFood={openFood} setOpenFood={setOpenFood}/>
+    <FoodDialog openFood={openFood} setOpenFood={setOpenFood}/>
       <Navbar />
       <Banner />
-      <Order/>
       <Menu setOpenFood={setOpenFood} />
+      <Order/>
       <ScrollToTop />
+      
     </>
   );
 }
