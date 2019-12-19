@@ -4,7 +4,8 @@ import { FoodLabel } from "../Menu/FoodGrid";
 import { pizzaRed } from "../Styles/colors";
 import { Title } from "../Styles/title";
 import { formatPrice } from "../Data/FoodData";
-
+import { QuantityInput } from "./QuantityInput";
+import { useQuantity } from "../Hooks/useQuantity";
 const Dialog = styled.div`
     width: 500px;
     background-color: white;
@@ -44,6 +45,7 @@ const DialogBanner = styled.div`
 export const DialogContent = styled.div`
     min-height: 100px;
     overflow: auto;
+    padding: 0px 40px;
 `;
 
 export const DialogFooter = styled.div`
@@ -65,12 +67,18 @@ export const ConfirmButton = styled(Title)`
     background-color: ${pizzaRed};
 `;
 
-export const FoodDialog = ({ openFood, setOpenFood, setOrders, orders }) => {
+export function getPrice(order) {
+    return order.quantity * order.price;
+}
+
+function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
+    const quantity = useQuantity(openFood && openFood.quantity);
     function close() {
         setOpenFood();
     }
     const order = {
-        ...openFood
+        ...openFood,
+        quantity: quantity.value
     };
     function addToOrder() {
         setOrders([...orders, order]);
@@ -86,14 +94,19 @@ export const FoodDialog = ({ openFood, setOpenFood, setOrders, orders }) => {
                         <div>{formatPrice(openFood.price)}</div>
                     </DialogFoodLabel>
                 </DialogBanner>
-                <DialogContent>dd</DialogContent>
+                <DialogContent>
+                    <QuantityInput quantity={quantity}></QuantityInput>
+                </DialogContent>
 
                 <DialogFooter>
-                    <ConfirmButton onClick={addToOrder}>
-                        Add to Order : {formatPrice(openFood.price)}
-                    </ConfirmButton>
+                    <ConfirmButton onClick={addToOrder}>Add to Order : {formatPrice(getPrice(order))}</ConfirmButton>
                 </DialogFooter>
             </Dialog>
         </>
     ) : null;
-};
+}
+
+export function FoodDialog(props) {
+    if (!props.openFood) return null;
+    return <FoodDialogContainer {...props} />;
+}
