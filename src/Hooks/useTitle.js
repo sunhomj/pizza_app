@@ -1,0 +1,15 @@
+import { useEffect } from "react";
+
+export function useTitle({ openFood, orders }) {
+    useEffect(() => {
+        console.log(orders);
+        if (openFood) {
+            document.title = openFood.name;
+        } else {
+            document.title =
+                orders.length === 0
+                    ? "What'f for dinner? "
+                    : `[${orders.length}] items in your order!`;
+        }
+    });
+}
