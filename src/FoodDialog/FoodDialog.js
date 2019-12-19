@@ -6,6 +6,8 @@ import { Title } from "../Styles/title";
 import { formatPrice } from "../Data/FoodData";
 import { QuantityInput } from "./QuantityInput";
 import { useQuantity } from "../Hooks/useQuantity";
+import { Toopings } from "./Toopings";
+
 const Dialog = styled.div`
     width: 500px;
     background-color: white;
@@ -66,6 +68,9 @@ export const ConfirmButton = styled(Title)`
     cursor: pointer;
     background-color: ${pizzaRed};
 `;
+function hasTooping(openFood) {
+    return openFood.section === "Pizza";
+}
 
 export function getPrice(order) {
     return order.quantity * order.price;
@@ -96,6 +101,12 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
                 </DialogBanner>
                 <DialogContent>
                     <QuantityInput quantity={quantity}></QuantityInput>
+                    {hasTooping(openFood) && (
+                        <>
+                            <h3>Would you like tooping?</h3>
+                            <Toopings></Toopings>
+                        </>
+                    )}
                 </DialogContent>
 
                 <DialogFooter>
