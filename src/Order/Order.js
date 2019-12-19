@@ -4,14 +4,14 @@ import { DialogFooter, DialogContent, ConfirmButton, getPrice } from "../FoodDia
 import { formatPrice } from "../Data/FoodData";
 
 const OrderStyle = styled.div`
-    right: 0px;
-    top: 47px;
-    width: 340px;
     position: fixed;
-    height: calc(100% - 50px);
+    right: 0px;
+    top: 48px;
+    width: 340px;
     background-color: white;
-    box-shadow: 4px 0px 5px 4px grey;
+    height: calc(100% - 48px);
     z-index: 10;
+    box-shadow: 4px 0px 5px 4px grey;
     display: flex;
     flex-direction: column;
 `;
@@ -26,22 +26,34 @@ const OrderFooter = styled(DialogFooter)`
 `;
 
 const OrderContainer = styled.div`
-    box-shadow: 2px 0px 2px 0px grey;
-    padding: 10px;
+    padding: 10px 0px;
+    border-bottom: 1px solid grey;
+    ${({ editable }) =>
+        editable
+            ? `
+    &:hover {
+      cursor: pointer;
+      background-color: #e7e7e7;
+    }
+  `
+            : `
+    pointer-events: none; 
+  `}
 `;
 
 const OrderItems = styled.div`
-    padding: 10x;
+    padding: 10px 0px;
     display: grid;
-    grid-template-columns: 15px 20px 150px 20px 60px;
+    grid-template-columns: 20px 150px 20px 60px;
     justify-content: space-between;
 `;
 
 export const Order = ({ orders }) => {
-    const totalPrice = orders.reduce((total, order) => {
+    const subTotal = orders.reduce((total, order) => {
         return total + getPrice(order);
     }, 0);
-
+    const tax = subTotal * 0.07;
+    const totalPrice = subTotal - tax;
     return (
         <OrderStyle>
             {orders.length === 0 ? (
@@ -53,14 +65,38 @@ export const Order = ({ orders }) => {
                         <OrderContainer>
                             <OrderItems>
                                 <div>{order.quantity} </div>
-                                <div>X</div>
+
                                 <div>{order.name}</div>
                                 <div></div>
                                 <div>{formatPrice(getPrice(order))}</div>
                             </OrderItems>
-                            <div>{totalPrice}</div>
                         </OrderContainer>
                     ))}
+                    <OrderContainer>
+                        <OrderItems>
+                            <div></div>
+
+                            <div>SubTotal</div>
+                            <div>{formatPrice(subTotal)}</div>
+                            <div></div>
+                        </OrderItems>
+
+                        <OrderItems>
+                            <div></div>
+
+                            <div>Tax</div>
+                            <div>{formatPrice(tax)}</div>
+                            <div></div>
+                        </OrderItems>
+
+                        <OrderItems>
+                            <div></div>
+
+                            <div>Total Price</div>
+                            <div>{formatPrice(totalPrice)}</div>
+                            <div></div>
+                        </OrderItems>
+                    </OrderContainer>
                 </OrderContent>
             )}
 
