@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FoodLabel } from "../Menu/FoodGrid";
 import { pizzaRed } from "../Styles/colors";
 import { Title } from "../Styles/title";
+import { formatPrice } from "../Data/FoodData";
 
 const Dialog = styled.div`
     width: 500px;
@@ -80,12 +81,17 @@ export const FoodDialog = ({ openFood, setOpenFood, setOrders, orders }) => {
             <DialogShadow onClick={close}> </DialogShadow>
             <Dialog>
                 <DialogBanner img={openFood.img}>
-                    <DialogFoodLabel>{openFood.name}</DialogFoodLabel>
+                    <DialogFoodLabel>
+                        <div>{openFood.name}</div>
+                        <div>{formatPrice(openFood.price)}</div>
+                    </DialogFoodLabel>
                 </DialogBanner>
                 <DialogContent>dd</DialogContent>
 
                 <DialogFooter>
-                    <ConfirmButton onClick={addToOrder}>Confirm</ConfirmButton>
+                    <ConfirmButton onClick={addToOrder}>
+                        Add to Order : {formatPrice(openFood.price)}
+                    </ConfirmButton>
                 </DialogFooter>
             </Dialog>
         </>

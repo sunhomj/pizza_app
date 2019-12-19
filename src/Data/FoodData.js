@@ -1,65 +1,82 @@
+export function formatPrice(price) {
+    return price.toLocaleString("en-us", {
+        style: "currency",
+        currency: "USD"
+    });
+}
 export const foodItems = [
-	{
-		name: 'Cheese',
-		img: '/img/pizza.png',
-		section: 'Pizza'
-	},
-	{
-		name: 'Pepperoni',
-		img: '/img/pizza2.jpeg',
-		section: 'Pizza'
-	},
-	{
-		name: 'Prown',
-		img: '/img/sandwich.jpeg',
-		section: 'Sandwich'
-	},
-	{
-		name: 'gyro',
-		img: '/img/gyro.jpeg',
-		section: 'Side'
-	},
-	{
-		name: 'fires',
-		img: '/img/fries.jpeg',
-		section: 'Side'
-	},
-	{
-		name: 'chicken finger',
-		img: '/img/chicken-fingers.jpeg',
-		section: 'Side'
-	},
-	{
-		name: 'chicken',
-		img: '/img/chicken-pizza.jpeg',
-		section: 'Pizza'
-	},
-	{
-		name: 'bom',
-		img: '/img/pizza.jpeg',
-		section: 'Pizza'
-	},
-	{
-		name: 'subway',
-		img: '/img/sandwich-lemons.jpg',
-		section: 'Sandwich'
-	},
-	{
-		name: 'love',
-		img: '/img/pizza2.jpg',
-		section: 'Pizza'
-	},
-	{
-		name: 'club',
-		img: '/img/club-sandwich.jpg',
-		section: 'Sandwich'
-	}
+    {
+        name: "Cheese",
+        img: "/img/pizza.png",
+        section: "Pizza",
+        price: 2.2
+    },
+    {
+        name: "Pepperoni",
+        img: "/img/pizza2.jpeg",
+        section: "Pizza",
+        price: 2.7
+    },
+    {
+        name: "Prown",
+        img: "/img/sandwich.jpeg",
+        section: "Sandwich",
+        price: 8
+    },
+    {
+        name: "gyro",
+        img: "/img/gyro.jpeg",
+        section: "Side",
+        price: 6.5
+    },
+    {
+        name: "fires",
+        img: "/img/fries.jpeg",
+        section: "Side",
+        price: 4
+    },
+    {
+        name: "chicken finger",
+        img: "/img/chicken-fingers.jpeg",
+        section: "Side",
+        price: 2.3
+    },
+    {
+        name: "chicken",
+        img: "/img/chicken-pizza.jpeg",
+        section: "Pizza",
+        price: 2
+    },
+    {
+        name: "bom",
+        img: "/img/pizza.jpeg",
+        section: "Pizza",
+        price: 2
+    },
+    {
+        name: "subway",
+        img: "/img/sandwich-lemons.jpg",
+        section: "Sandwich",
+        price: 7
+    },
+    {
+        name: "love",
+        img: "/img/pizza2.jpg",
+        section: "Pizza",
+        price: 2.5
+    },
+    {
+        name: "club",
+        img: "/img/club-sandwich.jpg",
+        section: "Sandwich",
+        price: 6.5
+    }
 ];
 
 export const foods = foodItems.reduce((res, food) => {
-	if (!res[food.section]) {
-		res[food.section] = [];
-	}
-	res[food.section].push(food);
-	return res;
+    if (!res[food.section]) {
+        res[food.section] = [];
+    }
+    res[food.section].push(food);
+    return res;
 }, {});
