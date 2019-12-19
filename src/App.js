@@ -13,7 +13,7 @@ function App() {
     const openFood = useOpenFood();
     const orders = useOrders();
     // const [openFood, setOpenFood] = useState();
-
+    console.log(orders);
     return (
         <>
             <GlobalStyle />

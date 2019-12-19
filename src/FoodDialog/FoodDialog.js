@@ -69,7 +69,7 @@ export const FoodDialog = ({ openFood, setOpenFood, setOrders, orders }) => {
         setOpenFood();
     }
     const order = {
-        name: openFood
+        ...openFood
     };
     function addToOrder() {
         setOrders([...orders, order]);

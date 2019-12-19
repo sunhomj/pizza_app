@@ -28,13 +28,29 @@ const OrderFooter = styled(DialogFooter)`
     width: 100%;
 `;
 
+const OrderContainer = styled.div`
+    box-shadow: 2px 0px 2px 0px grey;
+    padding: 10px;
+`;
+
+const OrderItems = styled.div`
+    padding: 10x;
+`;
+
 export const Order = ({ orders }) => {
     return (
         <OrderStyle>
-            {!orders ? (
-                <OrderContent> your order is empty</OrderContent>
+            {orders.length === 0 ? (
+                <OrderContent> yourq Order </OrderContent>
             ) : (
-                <OrderContent>found {orders.length} orders </OrderContent>
+                <OrderContent>
+                    <OrderContainer> your Order </OrderContainer>{" "}
+                    {orders.map(order => (
+                        <OrderContainer>
+                            <OrderItems>{order.name}</OrderItems>
+                        </OrderContainer>
+                    ))}
+                </OrderContent>
             )}
 
             <OrderFooter>
