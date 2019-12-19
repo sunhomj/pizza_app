@@ -38,6 +38,10 @@ const OrderItems = styled.div`
 `;
 
 export const Order = ({ orders }) => {
+    const totalPrice = orders.reduce((total, order) => {
+        return total + getPrice(order);
+    }, 0);
+
     return (
         <OrderStyle>
             {orders.length === 0 ? (
@@ -54,6 +58,7 @@ export const Order = ({ orders }) => {
                                 <div></div>
                                 <div>{formatPrice(getPrice(order))}</div>
                             </OrderItems>
+                            <div>{totalPrice}</div>
                         </OrderContainer>
                     ))}
                 </OrderContent>
