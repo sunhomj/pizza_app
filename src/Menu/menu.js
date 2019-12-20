@@ -19,11 +19,12 @@ export const Menu = ({ setOpenFood }) => {
                             return (
                                 <Food
                                     img={food.img}
+                                    key={food.name}
                                     onClick={() => {
                                         setOpenFood(food);
                                     }}
                                 >
-                                    <FoodLabel>
+                                    <FoodLabel key={food.img}>
                                         <div>{food.name}</div>
                                         <div>{formatPrice(food.price)}</div>
                                     </FoodLabel>

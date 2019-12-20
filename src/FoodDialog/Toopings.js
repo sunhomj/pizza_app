@@ -3,7 +3,9 @@ import React from "react";
 
 const ToopingGrid = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    padding-bottom: 40px;
+    grid-template-columns: 35% auto;
 `;
 
 const ToopingCheckBox = styled.input`
@@ -13,16 +15,20 @@ const ToopingCheckBox = styled.input`
 const CheckBoxLabel = styled.label`
     cursor: pointer;
 `;
-export function Toopings() {
-    return (
-        <ToopingGrid>
+export function Toopings({ toopings, checkToopings }) {
+    let checkboxes = toopings.map((tooping, index) => (
+        <CheckBoxLabel>
             <ToopingCheckBox
                 type="checkbox"
-                onClick={() => {
-                    console.log("hellow");
+                key={tooping.name}
+                checked={tooping.checked}
+                onChange={() => {
+                    checkToopings(index);
                 }}
             />
-            <CheckBoxLabel>Tooping</CheckBoxLabel>
-        </ToopingGrid>
-    );
+            {tooping.name}
+        </CheckBoxLabel>
+    ));
+
+    return <ToopingGrid>{checkboxes}</ToopingGrid>;
 }

@@ -19,6 +19,8 @@ const OrderStyle = styled.div`
 const OrderContent = styled(DialogContent)`
     height: 100%;
     padding: 20px;
+    font-family: "Righteous", cursive;
+    text-align: center;
 `;
 
 const OrderFooter = styled(DialogFooter)`
@@ -48,16 +50,39 @@ const OrderItems = styled.div`
     justify-content: space-between;
 `;
 
+const DetailedTooping = styled.div`
+    font-size: 10px;
+    display: grid;
+    grid-gap: 4px;
+    text-align: center;
+
+    justify-content: center;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+
+    align-content: center;
+`;
+const ToopingBorder = styled.div`
+    border: 1px solid lightpink;
+    grid-gap: 2px;
+    border-radius: 10px;
+    &:hover {
+        background-color: grey;
+    }
+`;
+
 export const Order = ({ orders }) => {
     const subTotal = orders.reduce((total, order) => {
         return total + getPrice(order);
     }, 0);
     const tax = subTotal * 0.07;
     const totalPrice = subTotal - tax;
+    let toopingsum = null;
+
+    console.log(orders);
     return (
         <OrderStyle>
             {orders.length === 0 ? (
-                <OrderContent> yourq Order </OrderContent>
+                <OrderContent> Your Order is Empty </OrderContent>
             ) : (
                 <OrderContent>
                     <OrderContainer> your Order </OrderContainer>{" "}
@@ -70,14 +95,21 @@ export const Order = ({ orders }) => {
                                 <div></div>
                                 <div>{formatPrice(getPrice(order))}</div>
                             </OrderItems>
+                            <DetailedTooping>
+                                {order.toopings
+                                    .filter(t => t.checked)
+                                    .map(tooping => (
+                                        <ToopingBorder>{tooping.name}</ToopingBorder>
+                                    ))}
+                            </DetailedTooping>
                         </OrderContainer>
                     ))}
                     <OrderContainer>
                         <OrderItems>
                             <div></div>
 
-                            <div>SubTotal</div>
-                            <div>{formatPrice(subTotal)}</div>
+                            <div>SubTotal + Tooping</div>
+                            <div>{formatPrice(subTotal - toopingsum)}</div>
                             <div></div>
                         </OrderItems>
 

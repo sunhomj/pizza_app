@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export function useToopings(defaultTooping) {
     const [toopings, setToopings] = useState(defaultTooping || getDefaultToopings());
-    return <div></div>;
+    function checkToopings(index) {
+        const newtoopings = [...toopings];
+        newtoopings[index].checked = !toopings[index].checked;
+        setToopings(newtoopings);
+    }
+
+    return {
+        toopings,
+        checkToopings
+    };
 }
 
-const toppingsList = [
+const toopingsList = [
     "Extra Cheese",
     "Pepperoni",
     "Sausage",
@@ -17,9 +26,14 @@ const toppingsList = [
     "Artichokes",
     "Mushrooms",
     "Anchovies"
-  ];
-  
-function getDefaultToopings = () => {
-    
+];
 
+function getDefaultToopings() {
+    const tooping = toopingsList.map(el => {
+        return {
+            name: el,
+            checked: false
+        };
+    });
+    return tooping;
 }

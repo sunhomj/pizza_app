@@ -7,6 +7,7 @@ import { formatPrice } from "../Data/FoodData";
 import { QuantityInput } from "./QuantityInput";
 import { useQuantity } from "../Hooks/useQuantity";
 import { Toopings } from "./Toopings";
+import { useToopings } from "../Hooks/useToopings";
 
 const Dialog = styled.div`
     width: 500px;
@@ -72,23 +73,22 @@ function hasTooping(openFood) {
     return openFood.section === "Pizza";
 }
 
-export function getPrice(order) {
-    return order.quantity * order.price;
-}
-
 function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
     const quantity = useQuantity(openFood && openFood.quantity);
+    const toopings = useToopings(openFood.toopings);
     function close() {
         setOpenFood();
     }
     const order = {
         ...openFood,
-        quantity: quantity.value
+        quantity: quantity.value,
+        toopings: toopings.toopings
     };
     function addToOrder() {
         setOrders([...orders, order]);
         close();
     }
+
     return openFood ? (
         <>
             <DialogShadow onClick={close}> </DialogShadow>
@@ -103,8 +103,9 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
                     <QuantityInput quantity={quantity}></QuantityInput>
                     {hasTooping(openFood) && (
                         <>
-                            <h3>Would you like tooping?</h3>
-                            <Toopings></Toopings>
+                            <h3>Some tooping?</h3>
+                            <span>($0.5 each)</span>
+                            <Toopings {...toopings}></Toopings>
                         </>
                     )}
                 </DialogContent>
@@ -120,4 +121,9 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
 export function FoodDialog(props) {
     if (!props.openFood) return null;
     return <FoodDialogContainer {...props} />;
+}
+
+export function getPrice(order) {
+    return order.quantity * order.price + order.toopings.filter(t => t.checked).length * 0.5;
+    // + order.toopings.filter(t => t.checked).length;
 }
