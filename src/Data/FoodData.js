@@ -70,6 +70,12 @@ export const foodItems = [
         img: "/img/club-sandwich.jpg",
         section: "Sandwich",
         price: 6.5
+    },
+    {
+        price: 1,
+        name: "Soda",
+        section: "Drinks",
+        choices: ["Coke", "Sprite", "Root Beer"]
     }
 ];
 

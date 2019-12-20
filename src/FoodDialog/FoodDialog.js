@@ -8,6 +8,8 @@ import { QuantityInput } from "./QuantityInput";
 import { useQuantity } from "../Hooks/useQuantity";
 import { Toopings } from "./Toopings";
 import { useToopings } from "../Hooks/useToopings";
+import { useChoice } from "../Hooks/useChoice";
+import { Choices } from "./Choices";
 
 const Dialog = styled.div`
     width: 500px;
@@ -35,12 +37,14 @@ const DialogShadow = styled.div`
 const DialogFoodLabel = styled(FoodLabel)`
     font-size: 1em;
     margin: 10px;
+    top: ${({ img }) => (img ? `100px` : `20px`)};
 `;
 
 const DialogBanner = styled.div`
     min-height: 200px;
     margin-bottom: 20px;
-    ${({ img }) => `background-image: url(${img});`}
+
+    ${({ img }) => (img ? `background-image: url(${img});` : ` min-height: 75px;`)}
     background-position:center;
     background-size: cover;
     border-radius: 10px;
@@ -69,20 +73,32 @@ export const ConfirmButton = styled(Title)`
     cursor: pointer;
     background-color: ${pizzaRed};
 `;
+
 function hasTooping(openFood) {
     return openFood.section === "Pizza";
+}
+
+export function FoodDialog(props) {
+    if (!props.openFood) return null;
+    return <FoodDialogContainer {...props} />;
+}
+
+export function getPrice(order) {
+    return order.quantity * order.price + order.toopings.filter(t => t.checked).length * 0.5;
 }
 
 function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
     const quantity = useQuantity(openFood && openFood.quantity);
     const toopings = useToopings(openFood.toopings);
+    const choiceRadio = useChoice(openFood.choice);
     function close() {
         setOpenFood();
     }
     const order = {
         ...openFood,
         quantity: quantity.value,
-        toopings: toopings.toopings
+        toopings: toopings.toopings,
+        choices: choiceRadio.value
     };
     function addToOrder() {
         setOrders([...orders, order]);
@@ -108,6 +124,7 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
                             <Toopings {...toopings}></Toopings>
                         </>
                     )}
+                    {openFood.choice && <Choices openFood={openFood} choiceRadio={choiceRadio} />}
                 </DialogContent>
 
                 <DialogFooter>
@@ -116,14 +133,4 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
             </Dialog>
         </>
     ) : null;
-}
-
-export function FoodDialog(props) {
-    if (!props.openFood) return null;
-    return <FoodDialogContainer {...props} />;
-}
-
-export function getPrice(order) {
-    return order.quantity * order.price + order.toopings.filter(t => t.checked).length * 0.5;
-    // + order.toopings.filter(t => t.checked).length;
 }
