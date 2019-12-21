@@ -30,17 +30,6 @@ const OrderFooter = styled(DialogFooter)`
 const OrderContainer = styled.div`
     padding: 10px 0px;
     border-bottom: 1px solid grey;
-    ${({ editable }) =>
-        editable
-            ? `
-    &:hover {
-      cursor: pointer;
-      background-color: #e7e7e7;
-    }
-  `
-            : `
-    pointer-events: none; 
-  `}
 `;
 
 const OrderItems = styled.div`
@@ -48,6 +37,17 @@ const OrderItems = styled.div`
     display: grid;
     grid-template-columns: 20px 150px 20px 60px;
     justify-content: space-between;
+`;
+
+const OrderItemEdit = styled.div`
+    background-color: white;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: lightpink;
+        cursor: pointer;
+        opacity: 0.7;
+    }
 `;
 
 const DetailedTooping = styled.div`
@@ -61,27 +61,25 @@ const DetailedTooping = styled.div`
 
     align-content: center;
 `;
+
 const ToopingBorder = styled.div`
     border: 1px solid lightpink;
     grid-gap: 2px;
     border-radius: 10px;
-    &:hover {
-        background-color: grey;
-    }
 `;
 
-const DrinkName = styled.div`
-    font-size: 9px;
-    text-align: left;
-`;
-
-export const Order = ({ orders }) => {
+export const Order = ({ orders, setOrders, openFood, setOpenFood }) => {
     const subTotal = orders.reduce((total, order) => {
         return total + getPrice(order);
     }, 0);
     const tax = subTotal * 0.07;
     const totalPrice = subTotal - tax;
     let toopingsum = null;
+    const deleteOrder = index => {
+        let newOrders = [...orders];
+        newOrders.splice(index, 1);
+        setOrders(newOrders);
+    };
 
     return (
         <OrderStyle>
@@ -90,13 +88,22 @@ export const Order = ({ orders }) => {
             ) : (
                 <OrderContent>
                     <OrderContainer> your Order </OrderContainer>{" "}
-                    {orders.map(order => (
+                    {orders.map((order, index) => (
                         <OrderContainer>
                             <OrderItems>
                                 <div>{order.quantity} </div>
 
-                                <div>{order.name}</div>
-                                <div></div>
+                                <OrderItemEdit
+                                    onClick={() => {
+                                        setOpenFood({ ...order, index });
+                                    }}
+                                >
+                                    {order.name}
+                                </OrderItemEdit>
+                                <div style={{ cursor: "pointer" }} onClick={() => deleteOrder(index)}>
+                                    {" "}
+                                    🚮{" "}
+                                </div>
                                 <div>{formatPrice(getPrice(order))}</div>
                             </OrderItems>
                             <DetailedTooping>

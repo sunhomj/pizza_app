@@ -30,7 +30,7 @@ export const foodItems = [
         price: 6.5
     },
     {
-        name: "fires",
+        name: "fries",
         img: "/img/fries.jpeg",
         section: "Side",
         price: 4

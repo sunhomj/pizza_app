@@ -15,7 +15,7 @@ export function useToopings(defaultTooping) {
 }
 
 const toopingsList = [
-    "Extra Cheese",
+    "Cheese +",
     "Pepperoni",
     "Sausage",
     "Onions",

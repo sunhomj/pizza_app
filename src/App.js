@@ -3,7 +3,6 @@ import { GlobalStyle } from "./Styles/GlobalStyle";
 import { Navbar } from "./Navbar/Navbar";
 import { Banner } from "./Banner/Banner";
 import { Menu } from "./Menu/menu";
-import ScrollToTop from "./ScrollToTop/ScrollToTop";
 import { FoodDialog } from "./FoodDialog/FoodDialog";
 import { Order } from "./Order/Order";
 import { useOpenFood } from "./Hooks/useOpenFood";
@@ -21,7 +20,7 @@ function App() {
             <FoodDialog {...openFood} {...orders} />
             <Navbar />
             <Banner />
-            <Order {...orders} />
+            <Order {...orders} {...openFood} />
             <Menu {...openFood} />
         </>
     );
