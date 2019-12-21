@@ -14,8 +14,7 @@ function App() {
     const openFood = useOpenFood();
     const orders = useOrders();
     useTitle({ ...openFood, ...orders });
-    // const [openFood, setOpenFood] = useState();
-    console.log(orders);
+
     return (
         <>
             <GlobalStyle />
@@ -24,7 +23,6 @@ function App() {
             <Banner />
             <Order {...orders} />
             <Menu {...openFood} />
-            <ScrollToTop />
         </>
     );
 }

@@ -53,6 +53,7 @@ export const DialogContent = styled.div`
     min-height: 100px;
     overflow: auto;
     padding: 0px 40px;
+    margin-bottom: 40px;
 `;
 
 export const DialogFooter = styled.div`
@@ -72,6 +73,12 @@ export const ConfirmButton = styled(Title)`
     width: 200px;
     cursor: pointer;
     background-color: ${pizzaRed};
+
+    ${({ disabled }) =>
+        disabled &&
+        `opacity : 0.5;
+    background-color: grey; 
+    pointer-events: none;`}
 `;
 
 function hasTooping(openFood) {
@@ -124,11 +131,13 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
                             <Toopings {...toopings}></Toopings>
                         </>
                     )}
-                    {openFood.choice && <Choices openFood={openFood} choiceRadio={choiceRadio} />}
+                    {openFood.choices && <Choices openFood={openFood} choiceRadio={choiceRadio} />}
                 </DialogContent>
 
                 <DialogFooter>
-                    <ConfirmButton onClick={addToOrder}>Add to Order : {formatPrice(getPrice(order))}</ConfirmButton>
+                    <ConfirmButton onClick={addToOrder} disabled={openFood.choices && !choiceRadio.value}>
+                        Add to Order : {formatPrice(getPrice(order))}
+                    </ConfirmButton>
                 </DialogFooter>
             </Dialog>
         </>

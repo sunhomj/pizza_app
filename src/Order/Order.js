@@ -70,6 +70,11 @@ const ToopingBorder = styled.div`
     }
 `;
 
+const DrinkName = styled.div`
+    font-size: 9px;
+    text-align: left;
+`;
+
 export const Order = ({ orders }) => {
     const subTotal = orders.reduce((total, order) => {
         return total + getPrice(order);
@@ -78,7 +83,6 @@ export const Order = ({ orders }) => {
     const totalPrice = subTotal - tax;
     let toopingsum = null;
 
-    console.log(orders);
     return (
         <OrderStyle>
             {orders.length === 0 ? (
@@ -95,6 +99,9 @@ export const Order = ({ orders }) => {
                                 <div></div>
                                 <div>{formatPrice(getPrice(order))}</div>
                             </OrderItems>
+                            <DetailedTooping>
+                                {order.choices ? <ToopingBorder>{order.choices}</ToopingBorder> : null}
+                            </DetailedTooping>
                             <DetailedTooping>
                                 {order.toopings
                                     .filter(t => t.checked)
